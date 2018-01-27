@@ -1,5 +1,19 @@
 #!/bin/bash
 
+function print_usage () {
+	cat 1>&2 <<__EOF__
+Usage: harvester [<flags>]
+
+Flags:
+      --help                     Show context-sensitive help.
+  -p, --project=PROJECT          Project alias.
+  -t, --time=7                   Time spent working on project.
+  -d, --date=DATE                Date when work was done (e.g. 2017-01-31).
+  -m, --description=DESCRIPTION  Description of work.
+      --list-modules             List project sprints with IDs.
+__EOF__
+}
+
 function main () {
 	local project=''
 	local time=''
@@ -64,6 +78,9 @@ function main () {
 				continue
 				;;
 			--help)
+				print_usage
+
+				return 0
 				;;
 		esac
 	done
