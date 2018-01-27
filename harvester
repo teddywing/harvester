@@ -21,9 +21,6 @@ function main () {
 	local description=''
 
 	while [ $# -gt 0 ]; do
-		# if [ "$1" = '-p' -o "$1" = '--project' ]; then
-		# fi
-
 		case "$1" in
 			-p | --project)
 				project="$2"
