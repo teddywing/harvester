@@ -1,9 +1,5 @@
 #!/bin/bash
 
-function get_value () {
-	local option="$1"
-}
-
 function main () {
 	local project=''
 	local time=''
