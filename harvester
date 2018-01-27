@@ -14,6 +14,31 @@ Flags:
 __EOF__
 }
 
+function error_flag () {
+	local flag="$1"
+
+	echo "harvester: error: required flag $flag not provided, try --help"
+
+	exit 1
+}
+
+function hcl_log () {
+	local project="$1"
+	local time="$2"
+	local date="$3"
+	local description="$4"
+
+	if [ -z "$project" ]; then
+		error_flag '--project'
+	fi
+
+	if [ ! -z "$time" ]; then
+		time="+${time}"
+	fi
+
+	echo "${date} @${project} ${time} ${description}"
+}
+
 function main () {
 	local project=''
 	local time=''
@@ -82,7 +107,7 @@ function main () {
 		esac
 	done
 
-	echo "Project '$project'; Time '$time'; Date '$date'; Description '$description'"
+	hcl_log "$project" "$time" "$date" "$description"
 }
 
 main "$@"
