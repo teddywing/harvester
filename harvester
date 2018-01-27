@@ -1,0 +1,78 @@
+#!/bin/bash
+
+function get_value () {
+	local option="$1"
+}
+
+function main () {
+	local project=''
+	local time=''
+	local date=''
+	local description=''
+
+	while [ $# -gt 0 ]; do
+		# if [ "$1" = '-p' -o "$1" = '--project' ]; then
+		# fi
+
+		case "$1" in
+			-p | --project)
+				project="$2"
+
+				shift 2
+				continue
+				;;
+			--project=*)
+				project="${1##--project=}"
+
+				shift
+				continue
+				;;
+			-t | --time)
+				time="$2"
+
+				shift 2
+				continue
+				;;
+			--time=*)
+				time="${1##--time=}"
+
+				shift
+				continue
+				;;
+			-d | --date)
+				date="$2"
+
+				shift 2
+				continue
+				;;
+			--date=*)
+				date="${1##--date=}"
+
+				shift
+				continue
+				;;
+			-m | --description)
+				description="$2"
+
+				shift 2
+				continue
+				;;
+			--description=*)
+				description="${1##--description=}"
+
+				shift
+				continue
+				;;
+			--list-modules)
+				shift
+				continue
+				;;
+			--help)
+				;;
+		esac
+	done
+
+	echo "Project '$project'; Time '$time'; Date '$date'; Description '$description'"
+}
+
+main "$@"
