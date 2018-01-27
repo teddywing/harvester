@@ -36,7 +36,7 @@ function hcl_log () {
 		time="+${time}"
 	fi
 
-	echo "${date} @${project} ${time} ${description}"
+	hcl log "$date" "@${project}" "$time" "$description"
 }
 
 function main () {
