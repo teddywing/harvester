@@ -41,7 +41,7 @@ function hcl_log () {
 
 function main () {
 	local project=''
-	local time=''
+	local time='7'
 	local date=''
 	local description=''
 
