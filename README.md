@@ -25,6 +25,16 @@ default to the current day.
 * In order to use the `--date` option, [this patch to hcl is required][3].
 
 
+## Install
+Mac OS X users can install Harvester with Homebrew:
+
+	$ brew install https://raw.githubusercontent.com/teddywing/harvester/master/Homebrew/harvester.rb
+
+On other platforms, grab the code and put the `harvester` script in your `PATH`.
+Bash completion for project aliases can be added by sourcing the
+`harvester.bash-completion` file in your Bash profile.
+
+
 ## License
 Copyright © 2018 Teddy Wing. Licensed under the GNU GPLv3+ (see the included
 COPYING file).
