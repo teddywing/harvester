@@ -1,8 +1,8 @@
 class Harvester < Formula
   desc "A program that wraps 'hcl' to interact with Harvest with a Timetasker-like interface"
   homepage "https://github.com/teddywing/harvester"
-  url "https://github.com/teddywing/harvester/archive/v0.1.0.tar.gz"
-  sha256 "76faa9c83480a792fd4889bd95f930674898bff1037a0cfbeb31a1e9b9c23b10"
+  url "https://github.com/teddywing/harvester/archive/v0.2.0.tar.gz"
+  sha256 "50533a5d61a6363581bb0cd5856ec7f7175ae60933001e761fa96520b4aed897"
 
   def install
     bin.install "harvester"
