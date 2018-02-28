@@ -30,16 +30,23 @@ Flags:
   -d, --date=DATE                Date when work was done (e.g. 2017-01-31).
   -m, --description=DESCRIPTION  Description of work.
       --list-modules             List project sprints with IDs.
+      --update-module            Change the sprint of the given project.
   -v, --version                  Show application version.
 __EOF__
+}
+
+function exit_with_error () {
+	local message="$1"
+
+	echo "harvester: error: $message" 1>&2
+
+	exit 1
 }
 
 function error_flag () {
 	local flag="$1"
 
-	echo "harvester: error: required flag $flag not provided, try --help"
-
-	exit 1
+	exit_with_error "required flag $flag not provided, try --help"
 }
 
 function hcl_log () {
@@ -66,6 +73,32 @@ function list_modules () {
 		cut -d ' ' -f 2)
 
 	hcl tasks | grep "^${project_id}"
+}
+
+function update_module () {
+	local project="$1"
+
+	if [ -z "$project" ]; then
+		error_flag '--project'
+	fi
+
+	if ! command -v pick > /dev/null; then
+		exit_with_error '--update-module requires `pick(1)` (https://github.com/calleerlandsson/pick)'
+	fi
+
+	module_id=$(list_modules "$project" |
+		pick |
+		cut -d '	' -f 1)
+
+	if [ -z "$module_id" ]; then
+		exit_with_error 'bad module ID'
+	fi
+
+	project_id="${module_id% *}"
+	task_id="${module_id#* }"
+
+	hcl unalias "$project"
+	hcl alias "$project" "$project_id" "$task_id"
 }
 
 function main () {
@@ -128,6 +161,11 @@ function main () {
 				list_modules "$project"
 
 				return 0
+				;;
+			--update-module)
+				update_module "$project"
+
+				return
 				;;
 			--help)
 				print_usage
